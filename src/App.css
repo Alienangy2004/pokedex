@@ -1,34 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&family=Inter:wght@400;600&family=JetBrains+Mono:wght@500;700&display=swap');
+/* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
 
-:root {
+/* ==========================================================================
+   1. VARIABLES Y PALETA DE COLORES (MODO CLARO Y MODO OSCURO)
+   ========================================================================== */
+
+/* --- MODO CLARO (LIGHT THEME) --- */
+:root, [data-theme="light"] {
+  --bg-gradient: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  --bg-card: #ffffff;
+  --bg-card-bottom: #ffffff;
+  --text-main: #333333;
+  --text-muted: #666666;
+  --accent-neon: #289bb8;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --border-color: rgba(40, 155, 184, 0.25);
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --nav-bg: rgba(255, 255, 255, 0.9);
   --primary: #bc0007;
-  --primary-container: #e90d11;
-  --on-primary: #ffffff;
-  --bg-color: #F7F9FC;
-  --surface: #ffffff;
-  --text-main: #2a1614;
-  --text-muted: #5b5c5c;
-  --border-color: #E0E0E0;
 }
 
+/* --- MODO OSCURO (DARK THEME) --- */
+[data-theme="dark"] {
+  --bg-gradient: linear-gradient(-45deg, #30142b, #2772a1, #0f172a, #020617);
+  --bg-card: #242526;
+  --bg-card-bottom: #242526;
+  --text-main: #e4e6eb;
+  --text-muted: #a0a0a8;
+  --accent-neon: #289bb8;
+  --shadow: rgba(0, 0, 0, 0.6);
+  --border-color: rgba(40, 155, 184, 0.4);
+  --header-bg: rgba(36, 37, 38, 0.85);
+  --nav-bg: rgba(36, 37, 38, 0.9);
+  --primary: #ff4d4f;
+}
+
+/* ==========================================================================
+   2. CONFIGURACIÓN BASE Y ANIMACIÓN DE FONDO REPETITIVA
+   ========================================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-main);
-  font-family: 'Inter', sans-serif;
+  margin: 0;
   min-height: 100vh;
-  padding-bottom: 90px;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-gradient);
+  background-size: 400% 400%;
+  animation: gradientFlow 15s ease infinite;
+  color: var(--text-main);
+  transition: background 0.8s ease;
+  overflow-x: hidden;
+  padding-bottom: 95px;
 }
 
-/* Encabezado Superior */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==========================================================================
+   3. ENCABEZADO SUPERIOR (TOP APP BAR)
+   ========================================================================== */
 .top-header {
-  background: #ffffff;
-  border-bottom: 1px solid #e9bcb6;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
   height: 64px;
   display: flex;
   align-items: center;
@@ -37,63 +79,91 @@ body {
   position: sticky;
   top: 0;
   z-index: 40;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .top-header h1 {
-  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 1.35rem;
-  font-weight: 800;
-  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--accent-neon);
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(40, 155, 184, 0.4);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Botón Neón de Modo Día/Noche */
 .icon-btn {
   background: transparent;
-  border: none;
-  color: var(--primary);
+  border: 1px solid var(--accent-neon);
+  color: var(--accent-neon);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
   border-radius: 50%;
   cursor: pointer;
+  box-shadow: 0 0 10px var(--shadow);
 }
 
-/* Layout Principal */
+.icon-btn:hover {
+  background: var(--accent-neon);
+  color: #ffffff;
+  box-shadow: 0 0 15px var(--accent-neon);
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   4. CONTENEDOR Y GRID DE CATÁLOGO
+   ========================================================================== */
 .app-container {
-  max-width: 900px;
+  max-width: 1050px;
   margin: 1.5rem auto;
   padding: 0 1rem;
 }
 
-/* Grid de Catálogo */
 .pokemon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.5rem;
 }
 
-/* Tarjeta Estilo Stitch (Horizontal) */
+/* ==========================================================================
+   5. TARJETA POKÉMON (ESTILO NEÓN / GLASSMORPHISM)
+   ========================================================================== */
 .pokemon-card {
-  background: #ffffff;
+  background: var(--bg-card-bottom);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 1rem;
+  border-radius: 18px;
+  padding: 1.2rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  box-shadow: 0px 4px 20px rgba(34, 34, 36, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 1.1rem;
+  box-shadow: 0 10px 30px var(--shadow);
   position: relative;
+  overflow: hidden;
 }
 
 .pokemon-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0px 8px 30px rgba(34, 34, 36, 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px var(--accent-neon);
+  border-color: var(--accent-neon);
 }
 
 .pokemon-card--scanned {
   border: 2px solid #10B981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
 }
 
 .avatar-wrapper {
@@ -105,22 +175,24 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .avatar-img {
-  width: 75px;
-  height: 75px;
+  width: 78px;
+  height: 78px;
   object-fit: contain;
   z-index: 10;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
 }
 
 .btn-cry {
   position: absolute;
-  top: -4px;
-  right: -4px;
-  background: #2a1614;
+  top: -2px;
+  right: -2px;
+  background: #242526;
   color: #ffffff;
-  border: none;
+  border: 1px solid var(--accent-neon);
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -129,12 +201,12 @@ body {
   justify-content: center;
   cursor: pointer;
   z-index: 20;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  transition: transform 0.1s ease;
+  box-shadow: 0 0 8px var(--shadow);
 }
 
-.btn-cry:active {
-  transform: scale(0.9);
+.btn-cry:hover {
+  background: var(--accent-neon);
+  transform: scale(1.15);
 }
 
 .card-info {
@@ -146,15 +218,14 @@ body {
   font-size: 0.8rem;
   font-weight: 700;
   color: var(--text-muted);
-  margin-bottom: 2px;
 }
 
 .card-name {
-  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
   text-transform: capitalize;
-  margin-bottom: 6px;
+  margin: 2px 0 6px 0;
+  color: var(--text-main);
 }
 
 .card-types {
@@ -171,51 +242,54 @@ body {
   color: #ffffff;
   padding: 3px 10px;
   border-radius: 9999px;
-  background: #888;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* Colores de Tipo de Stitch */
-.type--grass { background-color: #78C850; }
-.type--poison { background-color: #A040A0; }
-.type--fire { background-color: #F08030; }
-.type--water { background-color: #6890F0; }
-.type--electric { background-color: #F8D030; color: #2a1614; }
-.type--bug { background-color: #A8B820; }
-.type--normal { background-color: #A8A878; }
+/* Colores de badges de tipo */
+.type--grass { background-color: #48C774; }
+.type--poison { background-color: #9B51E0; }
+.type--fire { background-color: #FF5A5F; }
+.type--water { background-color: #3772FF; }
+.type--electric { background-color: #FFD166; color: #111; }
+.type--bug { background-color: #8CB037; }
+.type--normal { background-color: #8D99AE; }
+.type--ground { background-color: #DDA15E; }
+.type--fairy { background-color: #F4ACB7; }
+.type--flying { background-color: #83A6F2; }
 
-/* Estados de UI */
+/* ==========================================================================
+   6. ESTADOS DE UI (CARGA Y ERROR)
+   ========================================================================== */
 .state-container {
-  border-radius: 16px;
-  padding: 2.5rem 1.5rem;
+  border-radius: 18px;
+  padding: 3rem 1.5rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
-}
-
-.state-loading {
-  background: #ffffff;
+  min-height: 220px;
+  background: var(--bg-card-bottom);
   border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px var(--shadow);
 }
 
 .state-error {
-  background: #ffdad6;
-  border: 1px solid #ba1a1a;
-  color: #93000a;
+  border-color: #ff4d4d;
+  color: #ff4d4d;
 }
 
-/* Pokeball Spinner de Stitch */
+/* Pokébola animada giratoria */
 .pokeball-spinner {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   background: linear-gradient(to bottom, #bc0007 50%, #ffffff 50%);
-  border: 4px solid #2a1614;
+  border: 4px solid #242526;
   position: relative;
   animation: spin 1.2s linear infinite;
   margin-bottom: 1rem;
+  box-shadow: 0 0 15px rgba(188, 0, 7, 0.4);
 }
 
 .pokeball-spinner::before {
@@ -225,7 +299,7 @@ body {
   left: -4px;
   right: -4px;
   height: 4px;
-  background: #2a1614;
+  background: #242526;
   transform: translateY(-50%);
 }
 
@@ -238,7 +312,7 @@ body {
   height: 14px;
   border-radius: 50%;
   background: #ffffff;
-  border: 3px solid #2a1614;
+  border: 3px solid #242526;
   transform: translate(-50%, -50%);
 }
 
@@ -246,19 +320,23 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-/* Escáner IA */
+/* ==========================================================================
+   7. VISOR Y BOTONES DEL ESCÁNER IA
+   ========================================================================== */
 .scanner-viewfinder {
   position: relative;
   width: 100%;
-  aspect-ratio: 4/3;
-  background: #2a1614;
-  border-radius: 16px;
+  max-width: 420px;
+  aspect-ratio: 1/1;
+  margin: 0 auto 1.5rem auto;
+  background: #000000;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0px 4px 20px rgba(34,34,36,0.15);
+  border: 2px solid var(--accent-neon);
+  box-shadow: 0 0 25px var(--shadow);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
 }
 
 .camera-feed {
@@ -267,26 +345,25 @@ body {
   object-fit: cover;
 }
 
-/* Brackets y Scanline de Stitch */
 .scanner-brackets {
   position: absolute;
-  inset: 16px;
+  inset: 18px;
   pointer-events: none;
 }
 
-.bracket-tl { position: absolute; top: 0; left: 0; width: 24px; height: 24px; border-top: 3px solid #bc0007; border-left: 3px solid #bc0007; }
-.bracket-tr { position: absolute; top: 0; right: 0; width: 24px; height: 24px; border-top: 3px solid #bc0007; border-right: 3px solid #bc0007; }
-.bracket-bl { position: absolute; bottom: 0; left: 0; width: 24px; height: 24px; border-bottom: 3px solid #bc0007; border-left: 3px solid #bc0007; }
-.bracket-br { position: absolute; bottom: 0; right: 0; width: 24px; height: 24px; border-bottom: 3px solid #bc0007; border-right: 3px solid #bc0007; }
+.bracket-tl { position: absolute; top: 0; left: 0; width: 24px; height: 24px; border-top: 3px solid var(--accent-neon); border-left: 3px solid var(--accent-neon); }
+.bracket-tr { position: absolute; top: 0; right: 0; width: 24px; height: 24px; border-top: 3px solid var(--accent-neon); border-right: 3px solid var(--accent-neon); }
+.bracket-bl { position: absolute; bottom: 0; left: 0; width: 24px; height: 24px; border-bottom: 3px solid var(--accent-neon); border-left: 3px solid var(--accent-neon); }
+.bracket-br { position: absolute; bottom: 0; right: 0; width: 24px; height: 24px; border-bottom: 3px solid var(--accent-neon); border-right: 3px solid var(--accent-neon); }
 
 .scan-line {
   position: absolute;
   left: 0;
   right: 0;
   height: 2px;
-  background: #bc0007;
-  box-shadow: 0 0 10px 2px rgba(188, 0, 7, 0.6);
-  animation: scanline 2.5s infinite linear;
+  background: var(--accent-neon);
+  box-shadow: 0 0 12px 3px var(--accent-neon);
+  animation: scanline 2.2s infinite linear;
 }
 
 @keyframes scanline {
@@ -296,37 +373,50 @@ body {
   100% { top: 100%; opacity: 0; }
 }
 
+/* Botón Neón Principal */
 .btn-scan {
-  background: var(--primary);
-  color: #ffffff;
-  font-family: 'Hanken Grotesk', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
+  position: relative;
   padding: 12px 28px;
-  border-radius: 14px;
-  border: none;
+  color: #ffffff;
+  background: var(--accent-neon);
+  border: 1px solid var(--accent-neon);
+  border-radius: 30px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0 auto;
-  box-shadow: 0px 8px 25px rgba(188, 0, 7, 0.35);
+  box-shadow: 0 0 15px var(--accent-neon);
+  transition: 0.3s ease;
 }
 
-/* Bottom Navigation Bar */
+.btn-scan:hover {
+  background: transparent;
+  color: var(--accent-neon);
+  box-shadow: 0 0 25px var(--accent-neon);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   8. BARRA DE NAVEGACIÓN INFERIOR (BOTTOM NAV)
+   ========================================================================== */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   height: 72px;
-  background: #ffffff;
-  border-top: 1px solid #e9bcb6;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: space-around;
   align-items: center;
   z-index: 50;
-  box-shadow: 0px -4px 20px rgba(34,34,36,0.08);
+  box-shadow: 0px -4px 20px var(--shadow);
 }
 
 .nav-item {
@@ -337,15 +427,15 @@ body {
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 6px 16px;
+  padding: 6px 20px;
   border-radius: 9999px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
-  transition: all 0.2s ease;
 }
 
 .nav-item.active {
-  background: var(--primary-container);
+  background: var(--accent-neon);
   color: #ffffff;
+  box-shadow: 0 0 15px var(--accent-neon);
 }
