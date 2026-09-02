@@ -58,3 +58,46 @@ npm run dev
 | **"Cambia la cantidad de Pokémon mostrados a 12 o 48"** | `src/pages/CatalogPage.jsx` | En la función `fetchCatalog`, se modifica el argumento numérico en `getPokemonList(12)` o `getPokemonList(48)`. |
 | **"¿Cómo evitas saturar la PokéAPI con llamadas continuas en la cámara?"** | `src/pages/ScannerPage.jsx` | Se utiliza la referencia mutable `lastDetectedRef`. Aunque el bucle de predicción analiza fotogramas a 60 FPS con `requestAnimationFrame`, solo se ejecuta `fetchScannedPokemon()` si el Pokémon detectado con más del 60% de certeza es distinto al guardado en `lastDetectedRef.current`. |
 | **"Demuestra el reconocimiento de los 3 Pokémon"** | Pestaña **Escáner IA** | Se inicia la cámara y se muestra frente al lente una imagen o figura de Pikachu, Charmander y Squirtle de forma consecutiva, verificando que la interfaz cambie la tarjeta y descargue el sonido correspondiente. |
+
+## 🎨 1. Evidencias de Diseño en Google Stitch
+
+Propuesta visual y maquetación inicial exportada desde Google Stitch:
+
+| Guía de Estilos y UI Kits | Prototipo del Catálogo |
+| :---: | :---: |
+| <img src="docs/stitch/stitch-guia-estilos.png" alt="Guía de Estilos Stitch" width="400" /> | <img src="docs/stitch/stitch-catalogo.png" alt="Prototipo Catálogo Stitch" width="280" /> |
+
+| Prototipo Escáner IA | Estados del Sistema (Loading / Error / Empty) |
+| :---: | :---: |
+| <img src="docs/stitch/stitch-escaner.png" alt="Prototipo Escáner Stitch" width="280" /> | <img src="docs/stitch/stitch-estados-ui.png" alt="Estados del Sistema Stitch" width="280" /> |
+
+---
+
+## 🧠 2. Dataset y Entrenamiento de Visión Computacional
+
+Dataset entrenado en **Teachable Machine (Google)** con más de 900 a 1300 muestras fotográficas por clase:
+
+<p align="center">
+  <img src="docs/stitch/teachable-machine-dataset.png" alt="Dataset Teachable Machine" width="750" />
+</p>
+
+* **Clase 1 (Pikachu):** 1,203 muestras.
+* **Clase 2 (Charmander):** 1,303 muestras.
+* **Clase 3 (Squirtle):** 1,203 muestras.
+* **Clase 4 (Vacío / Fondo):** 964 muestras de descarte.
+
+---
+
+## 🚀 3. Evidencias de la Aplicación en Ejecución (React + Vite)
+
+Capturas de la aplicación web consumiendo la PokéAPI con el fondo dinámico `gradientFlow` y soporte Dark/Light mode:
+
+### Catálogo Nacional (Consumo de PokéAPI)
+<p align="center">
+  <img src="docs/stitch/app-catalogo-running.png" alt="Catálogo en Ejecución" width="850" />
+</p>
+
+### Escáner IA (Módulo de Visión Artificial)
+<p align="center">
+  <img src="docs/stitch/app-escaner-running.png" alt="Escáner en Ejecución" width="850" />
+</p>
