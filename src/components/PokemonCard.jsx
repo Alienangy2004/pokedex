@@ -1,3 +1,4 @@
+// Tarjetas individuales
 import React, { useState } from 'react';
 import { Volume2, AlertCircle } from 'lucide-react';
 
@@ -15,14 +16,16 @@ const typeColors = {
 };
 
 export default function PokemonCard({ pokemon }) {
+    // Control de reproduccion
   const [isPlaying, setIsPlaying] = useState(false);
+   // En caso de fallo del sonido
   const [audioError, setAudioError] = useState(false);
 
   const mainType = pokemon.types[0] || 'normal';
   const badgeColor = typeColors[mainType] || '#A8A878';
 
   const handlePlayCry = (e) => {
-    e.stopPropagation();
+    e.stopPropagation(); // Evitar que se pulse por accidente
     if (!pokemon.cry) {
       setAudioError(true);
       return;
@@ -30,7 +33,7 @@ export default function PokemonCard({ pokemon }) {
 
     setAudioError(false);
     setIsPlaying(true);
-
+    //Ajuste del volumen a 60%
     const audio = new Audio(pokemon.cry);
     audio.volume = 0.6;
     
@@ -38,6 +41,7 @@ export default function PokemonCard({ pokemon }) {
       .then(() => {
         audio.onended = () => setIsPlaying(false);
       })
+      //En caso de error del audio
       .catch(() => {
         setIsPlaying(false);
         setAudioError(true);

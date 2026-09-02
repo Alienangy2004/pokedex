@@ -1,10 +1,11 @@
+// Uso de la camara
 import React, { useEffect, useRef, useState } from 'react';
 import * as tmImage from '@teachablemachine/image';
 import { getPokemonDetails } from '../services/pokeApi';
 import PokemonCard from '../components/PokemonCard';
 import { Camera, CameraOff, Sparkles, AlertCircle, CheckCircle2 } from 'lucide-react';
 
-// REEMPLAZA CON TU ENLACE DE TEACHABLE MACHINE (debe terminar en /)
+// Enlace con el modelo de teachable machine
 const MODEL_URL = "https://teachablemachine.withgoogle.com/models/wewjrhGxi/";
 
 export default function ScannerPage() {
@@ -22,7 +23,7 @@ export default function ScannerPage() {
   const lastDetectedRef = useRef(null);
   const isPredictingRef = useRef(false);
 
-  // 1. Cargar el modelo
+  // Cargar el modelo
   useEffect(() => {
     async function loadModel() {
       try {
@@ -42,7 +43,7 @@ export default function ScannerPage() {
     };
   }, []);
 
-  // 2. Encender cámara web
+  // Encender cámara web
   const startCamera = async () => {
     setCameraError(null);
     try {
@@ -62,7 +63,7 @@ export default function ScannerPage() {
     }
   };
 
-  // 3. Detener cámara
+  // Detener cámara
   const stopCamera = () => {
     isPredictingRef.current = false;
     if (videoRef.current && videoRef.current.srcObject) {
@@ -75,7 +76,7 @@ export default function ScannerPage() {
     setStatus('Cámara detenida.');
   };
 
-  // 4. Bucle de predicción
+  // Bucle de predicción
   useEffect(() => {
     let animationId;
 
@@ -123,7 +124,7 @@ export default function ScannerPage() {
     };
   }, [cameraActive, model]);
 
-  // 5. Consulta a la PokéAPI
+  // Consulta a la PokéAPI
   const fetchScannedPokemon = async (name) => {
     setApiLoading(true);
     setApiError(null);

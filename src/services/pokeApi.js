@@ -1,7 +1,9 @@
+//Conexion a la PokeApi
 const BASE_URL = 'https://pokeapi.co/api/v2';
 
 /**
  * Obtiene los detalles específicos de un Pokémon por nombre o ID
+ * Es estricto con los nombres
  */
 export async function getPokemonDetails(nameOrId) {
   try {
@@ -14,9 +16,9 @@ export async function getPokemonDetails(nameOrId) {
     return {
       id: data.id,
       name: data.name,
-      // Imagen oficial de alta resolución con respaldo de sprite frontal
+      // Imagen oficial
       image: data.sprites?.other?.['official-artwork']?.front_default || data.sprites?.front_default || null,
-      // Sonido / Cry oficial (formato .ogg)
+      // Sonido
       cry: data.cries?.latest || data.cries?.legacy || null,
       types: data.types ? data.types.map(t => t.type.name) : [],
     };

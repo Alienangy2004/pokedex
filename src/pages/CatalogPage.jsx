@@ -12,7 +12,7 @@ export default function CatalogPage() {
     setLoading(true);
     setError(null);
     try {
-      // Solicita los primeros 24 Pokémon
+      // Se solicita los primeros 24 Pokemones
       const data = await getPokemonList(24);
       setPokemons(data);
     } catch (err) {
@@ -21,7 +21,8 @@ export default function CatalogPage() {
       setLoading(false);
     }
   };
-
+// Se ejecuta una sola vez justo cuando el componente 
+// Se monta por primera vez en la pantalla del usuario
   useEffect(() => {
     fetchCatalog();
   }, []);

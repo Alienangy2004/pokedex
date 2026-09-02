@@ -1,3 +1,4 @@
+// Modo noche y dia
 import React, { useState, useEffect } from 'react';
 import CatalogPage from './pages/CatalogPage';
 import ScannerPage from './pages/ScannerPage';
@@ -5,7 +6,7 @@ import { Grid, Scan, Sparkles, Sun, Moon } from 'lucide-react';
 import './App.css';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('catalog');
+  const [currentPage, setCurrentPage] = useState('catalog'); // Alternar catalogo y escanner
   // Estado para el modo Día / Noche
   const [theme, setTheme] = useState('light');
 
