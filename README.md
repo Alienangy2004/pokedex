@@ -10,9 +10,9 @@
 ---
 
 ## 🔗 Enlaces del Proyecto y Evidencias
-- **Despliegue en Producción (Vercel):** [Pega aquí tu enlace generado por Vercel]
-- **Repositorio de Código (GitHub):** [Pega aquí el enlace de tu repositorio de GitHub]
-- **Diseño en Google Stitch:** [Pega aquí el enlace público de tu prototipo en Google Stitch]
+- **Despliegue en Producción (Vercel):** [https://pokedex-phi-three-79.vercel.app/]
+- **Repositorio de Código (GitHub):** [https://github.com/Alienangy2004/pokedex]
+- **Diseño en Google Stitch:** [https://stitch.withgoogle.com/projects/9719409701327753821]
 - **Modelo de Visión Entrenado (Teachable Machine):** `https://teachablemachine.withgoogle.com/models/wewjrhGxi/`
 
 ---
@@ -65,26 +65,24 @@ Propuesta visual y maquetación inicial exportada desde Google Stitch:
 
 | Guía de Estilos y UI Kits | Prototipo del Catálogo |
 | :---: | :---: |
-| <img src="docs/stitch/stitch-guia-estilos.png" alt="Guía de Estilos Stitch" width="400" /> | <img src="docs/stitch/stitch-catalogo.png" alt="Prototipo Catálogo Stitch" width="280" /> |
+| ![Guía de Estilos Stitch](./docs/stitch/stitch-guia-estilos.png) | ![Prototipo Catálogo Stitch](./docs/stitch/stitch-catalogo.png) |
 
 | Prototipo Escáner IA | Estados del Sistema (Loading / Error / Empty) |
 | :---: | :---: |
-| <img src="docs/stitch/stitch-escaner.png" alt="Prototipo Escáner Stitch" width="280" /> | <img src="docs/stitch/stitch-estados-ui.png" alt="Estados del Sistema Stitch" width="280" /> |
+| ![Prototipo Escáner Stitch](./docs/stitch/stitch-escaner.png) | ![Estados del Sistema Stitch](./docs/stitch/stitch-estados-ui.png) |
 
 ---
 
 ## 🧠 2. Dataset y Entrenamiento de Visión Computacional
 
-Dataset entrenado en **Teachable Machine (Google)** con más de 900 a 1300 muestras fotográficas por clase:
+Dataset entrenado en **Teachable Machine (Google)** con más de 900 a 1,300 muestras por clase:
 
-<p align="center">
-  <img src="docs/stitch/teachable-machine-dataset.png" alt="Dataset Teachable Machine" width="750" />
-</p>
+![Dataset Teachable Machine](./docs/stitch/teachable-machine-dataset.png)
 
-* **Clase 1 (Pikachu):** 1,203 muestras.
-* **Clase 2 (Charmander):** 1,303 muestras.
-* **Clase 3 (Squirtle):** 1,203 muestras.
-* **Clase 4 (Vacío / Fondo):** 964 muestras de descarte.
+- **Clase 1 (Pikachu):** 1,203 muestras.
+- **Clase 2 (Charmander):** 1,303 muestras.
+- **Clase 3 (Squirtle):** 1,203 muestras.
+- **Clase 4 (Vacío / Fondo):** 964 muestras de descarte.
 
 ---
 
@@ -93,11 +91,7 @@ Dataset entrenado en **Teachable Machine (Google)** con más de 900 a 1300 muest
 Capturas de la aplicación web consumiendo la PokéAPI con el fondo dinámico `gradientFlow` y soporte Dark/Light mode:
 
 ### Catálogo Nacional (Consumo de PokéAPI)
-<p align="center">
-  <img src="docs/stitch/app-catalogo-running.png" alt="Catálogo en Ejecución" width="850" />
-</p>
+![Catálogo en Ejecución](./docs/stitch/app-catalogo-running.png)
 
 ### Escáner IA (Módulo de Visión Artificial)
-<p align="center">
-  <img src="docs/stitch/app-escaner-running.png" alt="Escáner en Ejecución" width="850" />
-</p>
+![Escáner en Ejecución](./docs/stitch/app-escaner-running.png)
